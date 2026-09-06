@@ -546,6 +546,7 @@ main .hidden{
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  background-color: var(--bg);
 }
 
 .cart-summary {

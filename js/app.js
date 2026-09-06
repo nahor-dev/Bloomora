@@ -81,7 +81,7 @@ function renderCart() {
         <p>$${product.price}</p>
       </div>
 
-      <button type="button" class="remove-btn" data-index="${index}">
+      <button type="button" class="remove-btn" id="remove-btn" data-index="${index}">
         Remove
       </button>
     </div>
@@ -90,11 +90,23 @@ function renderCart() {
   const total = cart.reduce((sum, product) => sum + product.price, 0);
 
   cartTotal.textContent = total.toFixed(2);
+
+  const removeBtn = document.getElementById("remove-btn")
+
+
+removeBtn.addEventListener("click", ()=>{
+
+    const removeId = Number(dataset.index);
+    const removeProduct = products.find((product) => index === removeId);
+
+    cart.pop(removeProduct);
+    cartItems.innerHTML = cart.map((product, index) => ``)
+
+  
+  console.log("remove")
+})
+
+
+
 }
 
-const removeBtn = document.querySelector("remove-btn")
-
-
-removeBtn.addEventListener("click", () =>{
-    console.log("remove")
-})
