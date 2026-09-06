@@ -10,15 +10,21 @@ const cartTotal = document.querySelector(".cart-total");
 
 import { products } from "./products.js";
 
-import { cart } from "./cart.js";
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
 
 const flowerGrid = document.querySelector(".flower-grid");
 const cartLink = document.querySelector(".cart-link")
 const cardPage = document.getElementById("cart")
 
+
+
+
+
 // let cart = JSON.parse(localStorage.getItem("bloomora-cart")) || [];
 cartLink.addEventListener("click", ()=>{
     cardPage.classList.toggle("hidden")
+    renderCart()
 })
 
 function renderProducts() {
@@ -67,13 +73,17 @@ flowerGrid.addEventListener("click", (event) => {
   const product = products.find((product) => product.id === productId);
 
   cart.push(product);
+  
+  saveCartToStorage()
     renderCart();
 //   console.log(cart);
 });
 
 function renderCart() {
+  
+
   cartItems.innerHTML = cart.map((product, index) => `
-    <div class="cart-item">
+    <div class="cart-item" data-id = "${product.id}">
       <img src="${product.image}" alt="${product.name}">
       
       <div>
@@ -81,7 +91,7 @@ function renderCart() {
         <p>$${product.price}</p>
       </div>
 
-      <button type="button" class="remove-btn" id="remove-btn" data-index="${index}">
+      <button type="button" class="remove-btn">
         Remove
       </button>
     </div>
@@ -90,23 +100,34 @@ function renderCart() {
   const total = cart.reduce((sum, product) => sum + product.price, 0);
 
   cartTotal.textContent = total.toFixed(2);
-
-  const removeBtn = document.getElementById("remove-btn")
-
-
-removeBtn.addEventListener("click", ()=>{
-
-    const removeId = Number(dataset.index);
-    const removeProduct = products.find((product) => index === removeId);
-
-    cart.pop(removeProduct);
-    cartItems.innerHTML = cart.map((product, index) => ``)
-
   
-  console.log("remove")
-})
-
-
+ 
 
 }
+
+
+
+cartItems.addEventListener("click", (event)=>{
+  if(event.target.classList.contains("remove-btn")) {
+
+    const itemCard = event.target.closest(".cart-item")
+    const productId = Number(itemCard.dataset.id)
+
+    const itemIndex = cart.findIndex(product => product.id === productId);
+
+    if (itemIndex !== -1) {
+            
+            cart.splice(itemIndex, 1);
+            
+            saveCartToStorage()
+            renderCart();       
+    }       
+  }
+})
+
+function saveCartToStorage() {
+    
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
 
