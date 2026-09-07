@@ -393,7 +393,9 @@ main{
     border-radius: 40px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
-
+.apple-badge.not-new{
+  display:none ;
+}
 
 .apple-fav-icon {
     position: absolute;

@@ -5,7 +5,8 @@ export const products = [
         descriptions:"smtg",
         price: 25,
         category: "Roses",
-        image: "assets/img/red-roses.png"
+        image: "assets/img/red-roses.png",
+        newArrival : true
 
     },
     {
@@ -14,7 +15,8 @@ export const products = [
         descriptions:"smtg",
         price: 25,
         category: "Roses",
-        image: "assets/img/pink-roses.png"
+        image: "assets/img/pink-roses.png",
+        newArrival : true
 
     },
     {
@@ -23,7 +25,8 @@ export const products = [
         descriptions:"smtg",
         price: 25,
         category: "Roses",
-        image: "assets/img/purple-roses.png"
+        image: "assets/img/purple-roses.png",
+        newArrival : false
 
     },
     {
@@ -32,7 +35,8 @@ export const products = [
         descriptions:"smtg",
         price: 25,
         category: "Roses",
-        image: "assets/img/purple-roses.png"
+        image: "assets/img/purple-roses.png",
+        newArrival : false
 
     },
    
