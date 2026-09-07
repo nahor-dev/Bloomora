@@ -14,7 +14,7 @@ export const products = [
         name: "pink Rose Bouquet",
         descriptions:"smtg",
         price: 25,
-        category: "Roses",
+        category: "pink",
         image: "assets/img/pink-roses.png",
         newArrival : true
 
@@ -34,7 +34,7 @@ export const products = [
         name: "purple Rose Bouquet",
         descriptions:"smtg",
         price: 25,
-        category: "Roses",
+        category: "red",
         image: "assets/img/purple-roses.png",
         newArrival : false
 

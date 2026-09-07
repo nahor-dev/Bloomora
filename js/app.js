@@ -10,37 +10,32 @@ const cartTotal = document.querySelector(".cart-total");
 
 import { products } from "./products.js";
 
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const flowerGrid = document.querySelector(".flower-grid");
-const cartLinks = document.querySelectorAll(".cart-link")
-const cardPage = document.getElementById("cart")
-
+const cartLinks = document.querySelectorAll(".cart-link");
+const cardPage = document.getElementById("cart");
+const categoryLists = document.querySelector(".category-list");
 
 function showCart() {
-   cardPage.classList.toggle("hidden")
-    renderCart()
+  cardPage.classList.toggle("hidden");
+  renderCart();
 }
-
-
 
 cartLinks.forEach((cartLink) => {
   cartLink.addEventListener("click", () => {
-    showCart()
-      
+    showCart();
+  });
+});
 
-  })
-})
-   
 
 
 function renderProducts(productsToRender) {
-  flowerGrid.innerHTML = productsToRender.map((product) => {
+  flowerGrid.innerHTML = productsToRender
+    .map((product) => {
+      const badgeClass = product.newArrival ? "" : "not-new";
 
-    const badgeClass = product.newArrival ? "" : "not-new";
-
-    return `
+      return `
       <article class="apple-flower-card">
   
         
@@ -69,24 +64,11 @@ function renderProducts(productsToRender) {
         </div>
       </article>
     `;
-  }).join("");
+    })
+    .join("");
 }
 
-
 renderProducts(products);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 flowerGrid.addEventListener("click", (event) => {
   if (!event.target.classList.contains("btn-secondary")) return;
@@ -96,19 +78,18 @@ flowerGrid.addEventListener("click", (event) => {
   const product = products.find((product) => product.id === productId);
 
   cart.push(product);
-  
-  saveCartToStorage()
-   
-    cardPage.classList.remove("hidden")
-    cartItemNumberCount()
-    renderCart()
 
+  saveCartToStorage();
+
+  cardPage.classList.remove("hidden");
+  cartItemNumberCount();
+  renderCart();
 });
 
 function renderCart() {
-  
-
-  cartItems.innerHTML = cart.map((product, index) => `
+  cartItems.innerHTML = cart
+    .map(
+      (product, index) => `
     <div class="cart-item" data-id = "${product.id}">
       <img src="${product.image}" alt="${product.name}">
       
@@ -121,81 +102,68 @@ function renderCart() {
         Remove
       </button>
     </div>
-  `).join("");
+  `,
+    )
+    .join("");
 
-  const total = cart.reduce((sum, product) => {return sum + product.price}, 0);
+  const total = cart.reduce((sum, product) => {
+    return sum + product.price;
+  }, 0);
 
   cartTotal.textContent = total.toFixed(2);
-  
- 
-
 }
 
+cartItems.addEventListener("click", (event) => {
+  if (event.target.classList.contains("remove-btn")) {
+    const itemCard = event.target.closest(".cart-item");
+    const productId = Number(itemCard.dataset.id);
 
-
-cartItems.addEventListener("click", (event)=>{
-  if(event.target.classList.contains("remove-btn")) {
-
-    const itemCard = event.target.closest(".cart-item")
-    const productId = Number(itemCard.dataset.id)
-
-    const itemIndex = cart.findIndex(product => product.id === productId);
+    const itemIndex = cart.findIndex((product) => product.id === productId);
 
     if (itemIndex !== -1) {
-            
-            cart.splice(itemIndex, 1);
-            
-            saveCartToStorage()
-            cartItemNumberCount()
-            renderCart();       
-    }       
+      cart.splice(itemIndex, 1);
+
+      saveCartToStorage();
+      cartItemNumberCount();
+      renderCart();
+    }
   }
-})
+});
 
 function saveCartToStorage() {
-    
-    localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+const cartItemNumber = document.querySelector(".cart-item-number");
 
-const cartItemNumber = document.querySelector(".cart-item-number")
-
-function cartItemNumberCount(){
+function cartItemNumberCount() {
   if (cart.length === 0) {
-    cartItemNumber.classList.add("not-seen") 
-    return
-  } 
-  cartItemNumber.textContent = cart.length
-
+    cartItemNumber.classList.add("not-seen");
+    return;
+  }
+  cartItemNumber.textContent = cart.length;
 }
-cartItemNumberCount()
+cartItemNumberCount();
 
-const showMoreBtn = document.querySelector(".show-more")
+const showMoreBtn = document.querySelector(".show-more");
 
 showMoreBtn.addEventListener("click", () => {
-  cartItems.classList.toggle("open")
+  cartItems.classList.toggle("open");
 
-
-  if (cartItems.classList.contains("open")){
-    showMoreBtn.innerHTML = "show less"
+  if (cartItems.classList.contains("open")) {
+    showMoreBtn.innerHTML = "show less";
   } else {
-    showMoreBtn.innerHTML = "show more"
+    showMoreBtn.innerHTML = "show more";
   }
+});
 
-})
-
-
-
-const searchInput = document.getElementById("search_input")
-
-
-
+const searchInput = document.getElementById("search_input");
 
 searchInput.addEventListener("input", () => {
   const searchTerm = searchInput.value.toLowerCase().trim();
 
-  const filteredProducts = products.filter(product =>
-    product.name.toLowerCase().includes(searchTerm)
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm),
   );
 
   renderProducts(filteredProducts);
@@ -203,7 +171,43 @@ searchInput.addEventListener("input", () => {
 
 
 
+const uniqueCategories = [...new Set(products.map(p => p.category))]; 
 
 
-    
+
+categoryLists.innerHTML += uniqueCategories.map(category =>`
+    <li>
+    <button type="button" class="category-btn" data-category="${category}">
+      ${category}
+    </button>
+  </li>
+              
+`
+
+
+).join("")
+
+
+
+
+categoryLists.addEventListener("click", (event) =>{
+  if (!event.target.classList.contains("category-btn")) return;
+
   
+
+  const categoryItem = event.target.dataset.category.toLowerCase()
+
+  if (categoryItem === "all") {
+    renderProducts(products);
+    return;
+  }
+
+  const categoryProduct = products.filter(product => 
+  product.category.toLowerCase().includes(categoryItem)
+
+  
+)
+
+  renderProducts(categoryProduct);
+})
+

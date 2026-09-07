@@ -342,6 +342,7 @@ main{
     border: 1px solid #058b68;
     border-radius: 15px;
     padding: 20px;
+   /* background-color: white; */
     overflow: hidden;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -622,6 +623,40 @@ main .hidden{
 .checkout-btn:hover{
   transform: translateY(-2px);
 }
+
+
+
+/* category section */
+
+.category-lists-container .category-list{
+  border: 1px solid #058b68;
+  border-radius: 15px;
+  display: flex;
+  row-gap: 5px;
+  column-gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px 0px;
+  /* background-color: red; */
+  padding: 10px;
+
+
+}
+.category-lists-container .category-list li{
+  list-style: none;
+}
+
+
+.category-btn {
+  background-color: #ffb6c15d; 
+  color: #333;
+  border: 1px solid #ff69b4fe;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
 /* Mobile */
 /* 
 @media (max-width: 600px) {
