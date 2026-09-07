@@ -146,8 +146,25 @@ function saveCartToStorage() {
 const cartItemNumber = document.querySelector(".cart-item-number")
 
 function cartItemNumberCount(){
-
+  if (cart.length === 0) {
+    cartItemNumber.classList.add("not-seen") 
+    return
+  } 
   cartItemNumber.textContent = cart.length
 
 }
 cartItemNumberCount()
+
+const showMoreBtn = document.querySelector(".show-more")
+
+showMoreBtn.addEventListener("click", () => {
+  cartItems.classList.toggle("open")
+
+
+  if (cartItems.classList.contains("open")){
+    showMoreBtn.innerHTML = "show less"
+  } else {
+    showMoreBtn.innerHTML = "show more"
+  }
+
+})
