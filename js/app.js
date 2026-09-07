@@ -18,14 +18,18 @@ const cartLinks = document.querySelectorAll(".cart-link")
 const cardPage = document.getElementById("cart")
 
 
-
+function showCart() {
+   cardPage.classList.toggle("hidden")
+    renderCart()
+}
 
 
 
 cartLinks.forEach((cartLink) => {
   cartLink.addEventListener("click", () => {
-       cardPage.classList.toggle("hidden")
-    renderCart()
+    showCart()
+      
+
   })
 })
    
@@ -79,7 +83,9 @@ flowerGrid.addEventListener("click", (event) => {
   cart.push(product);
   
   saveCartToStorage()
-    renderCart();
+    // renderCart();
+    cardPage.classList.remove("hidden")
+    renderCart()
 //   console.log(cart);
 });
 
