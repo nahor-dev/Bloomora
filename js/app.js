@@ -168,3 +168,29 @@ showMoreBtn.addEventListener("click", () => {
   }
 
 })
+
+
+
+const searchInput = document.getElementById("search_input")
+
+
+
+
+function searchItem(query) {
+    return products.filter( (item) =>{
+      return item.name.toLowerCase().includes(query)
+    })
+}
+
+
+
+
+searchInput.addEventListener("input", (event) => {
+      const searchTerm = event.target.value.toLowerCase()
+
+     console.log(searchItem(searchTerm))
+    
+
+    })
+    
+  

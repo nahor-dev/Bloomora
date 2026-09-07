@@ -124,6 +124,7 @@ header div{
 /* search section */
 form.hidden{
     visibility: hidden;
+    position: relative;
 }
 
 header div .search-btn{
@@ -214,6 +215,15 @@ justify-content: center;
     
 }
 
+/* .productList{
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.productList~li {
+  list-style: none;
+} */
 /* cta button section */
 .btn{
     display: flex;
