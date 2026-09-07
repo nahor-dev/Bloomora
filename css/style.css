@@ -109,6 +109,13 @@ header div{
     align-items: center;
     gap: 40px;
 }
+
+.cart-item-number{
+  background-color: var(--text-color);
+  padding: 5px;
+  border-radius: 50px;
+  color: white;
+}
 /* search section */
 form.hidden{
     visibility: hidden;

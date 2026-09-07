@@ -85,6 +85,7 @@ flowerGrid.addEventListener("click", (event) => {
   saveCartToStorage()
     // renderCart();
     cardPage.classList.remove("hidden")
+    cartItemNumberCount()
     renderCart()
 //   console.log(cart);
 });
@@ -107,7 +108,7 @@ function renderCart() {
     </div>
   `).join("");
 
-  const total = cart.reduce((sum, product) => sum + product.price, 0);
+  const total = cart.reduce((sum, product) => {return sum + product.price}, 0);
 
   cartTotal.textContent = total.toFixed(2);
   
@@ -130,6 +131,7 @@ cartItems.addEventListener("click", (event)=>{
             cart.splice(itemIndex, 1);
             
             saveCartToStorage()
+            cartItemNumberCount()
             renderCart();       
     }       
   }
@@ -141,3 +143,11 @@ function saveCartToStorage() {
 }
 
 
+const cartItemNumber = document.querySelector(".cart-item-number")
+
+function cartItemNumberCount(){
+
+  cartItemNumber.textContent = cart.length
+
+}
+cartItemNumberCount()
