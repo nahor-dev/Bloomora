@@ -14,18 +14,22 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 
 const flowerGrid = document.querySelector(".flower-grid");
-const cartLink = document.querySelector(".cart-link")
+const cartLinks = document.querySelectorAll(".cart-link")
 const cardPage = document.getElementById("cart")
 
 
 
 
 
-// let cart = JSON.parse(localStorage.getItem("bloomora-cart")) || [];
-cartLink.addEventListener("click", ()=>{
-    cardPage.classList.toggle("hidden")
+
+cartLinks.forEach((cartLink) => {
+  cartLink.addEventListener("click", () => {
+       cardPage.classList.toggle("hidden")
     renderCart()
+  })
 })
+   
+
 
 function renderProducts() {
   flowerGrid.innerHTML = products
