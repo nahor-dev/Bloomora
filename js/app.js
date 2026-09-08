@@ -1,9 +1,4 @@
-// const searchBtn = document.querySelector(".search__button")
-// const searchForm = document.querySelector(".search-form")
 
-// searchBtn.addEventListener('click', () => {
-//   searchForm.classList.toggle("hidden")
-// })
 
 const cartItems = document.querySelector(".cart-items");
 const cartTotal = document.querySelector(".cart-total");
@@ -17,10 +12,13 @@ const cartLinks = document.querySelectorAll(".cart-link");
 const cardPage = document.getElementById("cart");
 const categoryLists = document.querySelector(".category-list");
 
+// cart
+
 function showCart() {
   cardPage.classList.toggle("hidden");
   renderCart();
 }
+
 
 cartLinks.forEach((cartLink) => {
   cartLink.addEventListener("click", () => {
@@ -28,6 +26,8 @@ cartLinks.forEach((cartLink) => {
   });
 });
 
+
+// render products 
 
 
 function renderProducts(productsToRender) {
@@ -70,6 +70,9 @@ function renderProducts(productsToRender) {
 
 renderProducts(products);
 
+
+// add to cart 
+
 flowerGrid.addEventListener("click", (event) => {
   if (!event.target.classList.contains("btn-secondary")) return;
 
@@ -85,6 +88,9 @@ flowerGrid.addEventListener("click", (event) => {
   cartItemNumberCount();
   renderCart();
 });
+
+
+// render cart 
 
 function renderCart() {
   cartItems.innerHTML = cart
@@ -113,6 +119,9 @@ function renderCart() {
   cartTotal.textContent = total.toFixed(2);
 }
 
+
+// cart remove btn 
+
 cartItems.addEventListener("click", (event) => {
   if (event.target.classList.contains("remove-btn")) {
     const itemCard = event.target.closest(".cart-item");
@@ -130,9 +139,14 @@ cartItems.addEventListener("click", (event) => {
   }
 });
 
+
+// save to storage 
+
 function saveCartToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
+
+// cart item number 
 
 const cartItemNumber = document.querySelector(".cart-item-number");
 
@@ -145,6 +159,8 @@ function cartItemNumberCount() {
 }
 cartItemNumberCount();
 
+// show more for carts
+
 const showMoreBtn = document.querySelector(".show-more");
 
 showMoreBtn.addEventListener("click", () => {
@@ -156,6 +172,9 @@ showMoreBtn.addEventListener("click", () => {
     showMoreBtn.innerHTML = "show more";
   }
 });
+
+
+// search 
 
 const searchInput = document.getElementById("search_input");
 
@@ -170,6 +189,7 @@ searchInput.addEventListener("input", () => {
 });
 
 
+// category 
 
 const uniqueCategories = [...new Set(products.map(p => p.category))]; 
 
@@ -210,4 +230,36 @@ categoryLists.addEventListener("click", (event) =>{
 
   renderProducts(categoryProduct);
 })
+
+
+
+/////////////////////////////////////
+// active tab 
+///////////////////////////////////
+
+const navContainer = document.getElementById('main-nav');
+
+if (navContainer) {
+  
+  navContainer.addEventListener('click', (event) => {
+    const clickedTab = event.target.closest('.nav-tab');
+    
+    if (!clickedTab) return;
+    
+    if (clickedTab.getAttribute('aria-current') === 'page') return;
+
+    const currentActive = navContainer.querySelector('[aria-current="page"]');
+    
+    if (currentActive) {
+      currentActive.removeAttribute('aria-current');
+    }
+
+    clickedTab.setAttribute('aria-current', 'page');
+
+    
+
+  });
+
+
+}
 
