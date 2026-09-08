@@ -3,7 +3,7 @@ export const products = [
         id: 1,
         name: "Red Rose Bouquet",
         descriptions:"smtg",
-        price: 25,
+        price: 30,
         category: "Roses",
         image: "assets/img/red-roses.png",
         newArrival : true
@@ -23,7 +23,7 @@ export const products = [
         id: 3,
         name: "purple Rose Bouquet",
         descriptions:"smtg",
-        price: 25,
+        price: 20,
         category: "Roses",
         image: "assets/img/purple-roses.png",
         newArrival : false
@@ -33,7 +33,7 @@ export const products = [
         id: 4,
         name: "purple Rose Bouquet",
         descriptions:"smtg",
-        price: 25,
+        price: 16,
         category: "red",
         image: "assets/img/purple-roses.png",
         newArrival : false

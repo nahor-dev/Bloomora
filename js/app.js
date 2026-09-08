@@ -263,3 +263,31 @@ if (navContainer) {
 
 }
 
+/////////////
+//sorting item ///
+////////////////
+
+
+const sortDropDown = document.getElementById("sort-dropdown")
+if (sortDropDown){
+
+sortDropDown.addEventListener("change", (event) => {
+
+  const sortValue = event.target.value
+
+  let sortProduct = [...products]
+
+  if (sortValue === "price-low"){
+    sortProduct.sort((a, b) => a.price - b.price)
+  } else if (sortValue === "price-high") {
+    sortProduct.sort((a, b) => b.price - a.price)
+  } else if (sortValue === "name-az") {
+    sortProduct.sort((a, b) => a.name.localeCompare(b.name))
+  }
+  
+
+
+  renderProducts(sortProduct)
+})
+
+}
