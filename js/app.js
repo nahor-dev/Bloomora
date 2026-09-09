@@ -70,8 +70,10 @@ function renderProducts(productsToRender) {
 
 renderProducts(products);
 
-
+//////////////////
 // add to cart 
+//////////////////
+
 
 flowerGrid.addEventListener("click", (event) => {
   if (!event.target.classList.contains("btn-secondary")) return;
@@ -80,7 +82,13 @@ flowerGrid.addEventListener("click", (event) => {
 
   const product = products.find((product) => product.id === productId);
 
+// here quantity of product increase and decrease goes 
+
+
+
   cart.push(product);
+
+
 
   saveCartToStorage();
 
@@ -89,9 +97,9 @@ flowerGrid.addEventListener("click", (event) => {
   renderCart();
 });
 
-
+//////////////////
 // render cart 
-
+//////////////////
 function renderCart() {
   cartItems.innerHTML = cart
     .map(
@@ -102,6 +110,12 @@ function renderCart() {
       <div>
         <h3>${product.name}</h3>
         <p>$${product.price}</p>
+      </div>
+
+      <div id="quantity-btns">
+      <div>-</div>
+      <div id="number-display">1</div>
+      <div>+</div>
       </div>
 
       <button type="button" class="remove-btn">
@@ -119,9 +133,9 @@ function renderCart() {
   cartTotal.textContent = total.toFixed(2);
 }
 
-
+//////////////////
 // cart remove btn 
-
+//////////////////
 cartItems.addEventListener("click", (event) => {
   if (event.target.classList.contains("remove-btn")) {
     const itemCard = event.target.closest(".cart-item");
@@ -145,8 +159,9 @@ cartItems.addEventListener("click", (event) => {
 function saveCartToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
-
+//////////////////
 // cart item number 
+//////////////////
 
 const cartItemNumber = document.querySelector(".cart-item-number");
 
@@ -158,9 +173,9 @@ function cartItemNumberCount() {
   cartItemNumber.textContent = cart.length;
 }
 cartItemNumberCount();
-
+//////////////////
 // show more for carts
-
+//////////////////
 const showMoreBtn = document.querySelector(".show-more");
 
 showMoreBtn.addEventListener("click", () => {
@@ -173,8 +188,10 @@ showMoreBtn.addEventListener("click", () => {
   }
 });
 
-
+//////////////////
 // search 
+//////////////////
+
 
 const searchInput = document.getElementById("search_input");
 
@@ -188,9 +205,9 @@ searchInput.addEventListener("input", () => {
   renderProducts(filteredProducts);
 });
 
-
+//////////////////
 // category 
-
+/////////////////
 const uniqueCategories = [...new Set(products.map(p => p.category))]; 
 
 

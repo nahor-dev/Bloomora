@@ -566,8 +566,10 @@ main .hidden{
   padding: 5px 15px;
 }
 .cart-item {
-  display: grid;
-  grid-template-columns: 90px 1fr auto;
+  /* display: grid;
+  grid-template-columns: 90px 1fr auto; */
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
   padding: 1rem;
@@ -627,6 +629,19 @@ main .hidden{
 .checkout-btn:hover{
   transform: translateY(-2px);
 }
+#quantity-btns {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 30px;
+}
+#quantity-btns div {
+  background-color: var(--bg);
+  padding: 10px 15px 10px 15px ;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
 
 
 
